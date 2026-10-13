@@ -1,4 +1,5 @@
-const BASE_URL = 'https://smart-hospital-backend-odf9.onrender.com/api';
+ const BASE_URL = import.meta.env.VITE_API_URL || 'https://smart-hospital-backend-odf9.onrender.com/api';
+
 function getHeaders() {
   const token = localStorage.getItem('token');
   const headers = { 'Content-Type': 'application/json' };
@@ -13,7 +14,7 @@ async function handleResponse(response) {
     const errorData = await response.json().catch(() => ({ message: 'Server request failed' }));
     throw new Error(errorData.message || `HTTP Error ${response.status}`);
   }
-  if (response.status === 24) return null;
+  if (response.status === 204) return null;
   return response.json();
 }
 
@@ -67,7 +68,9 @@ export const api = {
 
   // Doctors
   getDoctors: async (departmentId = null) => {
-    const url = departmentId ? `${BASE_URL}/doctors?departmentId=${departmentId}` : `${BASE_URL}/doctors`;
+    const url = departmentId
+      ? `${BASE_URL}/doctors?departmentId=${departmentId}`
+      : `${BASE_URL}/doctors`;
     const res = await fetch(url);
     return handleResponse(res);
   },
@@ -78,7 +81,9 @@ export const api = {
   },
 
   getDoctorAppointments: async (date = null) => {
-    const url = date ? `${BASE_URL}/doctors/my-appointments?date=${date}` : `${BASE_URL}/doctors/my-appointments`;
+    const url = date
+      ? `${BASE_URL}/doctors/my-appointments?date=${date}`
+      : `${BASE_URL}/doctors/my-appointments`;
     const res = await fetch(url, { headers: getHeaders() });
     return handleResponse(res);
   },
@@ -143,7 +148,9 @@ export const api = {
   },
 
   getPrescriptionByAppointmentId: async (appointmentId) => {
-    const res = await fetch(`${BASE_URL}/prescriptions/appointment/${appointmentId}`, { headers: getHeaders() });
+    const res = await fetch(`${BASE_URL}/prescriptions/appointment/${appointmentId}`, {
+      headers: getHeaders()
+    });
     return handleResponse(res);
   },
 
