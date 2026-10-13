@@ -1,4 +1,4 @@
- const BASE_URL = import.meta.env.VITE_API_URL || 'https://smart-hospital-backend-odf9.onrender.com/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://smart-hospital-backend-odf9.onrender.com/api';
 
 function getHeaders() {
   const token = localStorage.getItem('token');
