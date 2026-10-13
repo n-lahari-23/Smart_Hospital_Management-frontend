@@ -88,7 +88,7 @@ export const Register = ({ setActivePage }) => {
           <div className="grid grid-2">
             <div className="form-group">
               <label>Password *</label>
-              <input type="password" name="password" className="form-control" required value={formData.password} onChange={handleChange} placeholder="••••••••" />
+              <input type="password" name="password" className="form-control" required value={formData.password} onChange={handleChange} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
             </div>
             <div className="form-group">
               <label>Phone Number *</label>
@@ -155,7 +155,7 @@ export const Register = ({ setActivePage }) => {
                   <input type="number" name="experienceYears" className="form-control" value={formData.experienceYears} onChange={handleChange} placeholder="10" />
                 </div>
                 <div className="form-group">
-                  <label>Fee ($)</label>
+                  <label>Consultation Fee (₹ / INR)</label>
                   <input type="number" name="consultationFee" className="form-control" value={formData.consultationFee} onChange={handleChange} placeholder="500" />
                 </div>
               </div>

@@ -1,3 +1,4 @@
+import { formatCurrency } from '../utils/currency';
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { Calendar, Clock, X, CheckCircle, Ticket } from 'lucide-react';
@@ -80,7 +81,7 @@ export const BookAppointmentModal = ({ doctor, onClose, onSuccess }) => {
               <div>
                 <h4 style={{ fontSize: '1.05rem' }}>{doctor.name}</h4>
                 <div style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700 }}>{doctor.specialization} ({doctor.departmentName})</div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Fee: ${doctor.consultationFee}</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Fee: {formatCurrency(doctor.consultationFee)}</div>
               </div>
             </div>
 

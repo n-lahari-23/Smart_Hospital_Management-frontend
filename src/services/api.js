@@ -1,5 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
-
+const BASE_URL = 'https://smart-hospital-backend-odf9.onrender.com/api';
 function getHeaders() {
   const token = localStorage.getItem('token');
   const headers = { 'Content-Type': 'application/json' };

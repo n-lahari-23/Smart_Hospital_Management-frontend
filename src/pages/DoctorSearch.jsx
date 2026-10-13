@@ -1,3 +1,4 @@
+import { formatCurrency } from '../utils/currency';
 import React, { useState, useEffect, useContext } from 'react';
 import { api } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
@@ -93,7 +94,7 @@ export const DoctorSearch = ({ setActivePage, onSelectDoctor }) => {
                   <div><strong>Department:</strong> {doc.departmentName || 'General'}</div>
                   <div><strong>Qualification:</strong> {doc.qualification}</div>
                   <div><strong>Experience:</strong> {doc.experienceYears} Years</div>
-                  <div><strong>Consultation Fee:</strong> ${doc.consultationFee}</div>
+                  <div><strong>Consultation Fee:</strong> {formatCurrency(doc.consultationFee)}</div>
                   <div><strong>Available Days:</strong> {doc.availableDays}</div>
                   <div><strong>Hours:</strong> {doc.availableTimeStart} - {doc.availableTimeEnd}</div>
                 </div>

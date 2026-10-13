@@ -1,3 +1,4 @@
+import { formatCurrency } from '../utils/currency';
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { Shield, Users, Stethoscope, Calendar, Plus, Trash2, Building } from 'lucide-react';
@@ -172,7 +173,7 @@ export const AdminDashboard = () => {
                   <th>Department</th>
                   <th>Specialization</th>
                   <th>Experience</th>
-                  <th>Fee</th>
+                  <th>Fee (INR)</th>
                   <th>Availability</th>
                 </tr>
               </thead>
@@ -183,7 +184,7 @@ export const AdminDashboard = () => {
                     <td>{doc.departmentName || 'N/A'}</td>
                     <td>{doc.specialization}</td>
                     <td>{doc.experienceYears} Yrs</td>
-                    <td>${doc.consultationFee}</td>
+                    <td>{formatCurrency(doc.consultationFee)}</td>
                     <td>{doc.availableDays}</td>
                   </tr>
                 ))}
