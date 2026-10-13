@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { api } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import { Users, CheckCircle, Clock, FilePlus, Phone } from 'lucide-react';
@@ -11,21 +11,22 @@ export const DoctorDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [consultingApp, setConsultingApp] = useState(null);
 
-  useEffect(() => {
-    loadAppointments();
-  }, [selectedDate]);
-
-  const loadAppointments = async () => {
+  const loadAppointments = useCallback(async () => {
     setLoading(true);
     try {
       const data = await api.getDoctorAppointments(selectedDate);
-      setAppointments(data);
+      setAppointments(Array.isArray(data) ? data : []);
     } catch (err) {
-      console.error(err);
+      console.error('Failed to load doctor appointments:', err);
+      setAppointments([]);
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedDate]);
+
+  useEffect(() => {
+    loadAppointments();
+  }, [loadAppointments]);
 
   const handleStatusUpdate = async (id, status) => {
     try {

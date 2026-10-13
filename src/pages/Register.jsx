@@ -16,7 +16,9 @@ export const Register = ({ setActivePage }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    api.getDepartments().then(setDepartments).catch(console.error);
+    api.getDepartments()
+      .then(data => setDepartments(Array.isArray(data) ? data : []))
+      .catch(console.error);
   }, []);
 
   const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });

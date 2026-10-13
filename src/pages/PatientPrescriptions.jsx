@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { FileText, Calendar, Pill } from 'lucide-react';
+import { FileText, Pill } from 'lucide-react';
 
 export const PatientPrescriptions = () => {
   const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.getMyPrescriptions().then(setPrescriptions).catch(console.error).finally(() => setLoading(false));
+    api.getMyPrescriptions()
+      .then(data => setPrescriptions(Array.isArray(data) ? data : []))
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, []);
 
   return (

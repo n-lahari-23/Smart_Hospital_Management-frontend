@@ -1,7 +1,7 @@
 import { formatCurrency } from '../utils/currency';
 import React, { useState } from 'react';
 import { api } from '../services/api';
-import { Calendar, Clock, X, CheckCircle, Ticket } from 'lucide-react';
+import { X, CheckCircle } from 'lucide-react';
 
 export const BookAppointmentModal = ({ doctor, onClose, onSuccess }) => {
   const [appointmentDate, setAppointmentDate] = useState(new Date().toISOString().split('T')[0]);

@@ -1,5 +1,5 @@
 import { formatCurrency } from '../utils/currency';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { api } from '../services/api';
 import { Users, Stethoscope, Calendar, Plus, Trash2, Building } from 'lucide-react';
 
@@ -13,11 +13,7 @@ export const AdminDashboard = () => {
   // New Department Form State
   const [newDept, setNewDept] = useState({ name: '', description: '', icon: 'FaStethoscope' });
 
-  useEffect(() => {
-    loadAdminData();
-  }, []);
-
-  const loadAdminData = async () => {
+  const loadAdminData = useCallback(async () => {
     try {
       const [sData, dData, docData, appData] = await Promise.all([
         api.getAdminStats(),
@@ -26,13 +22,17 @@ export const AdminDashboard = () => {
         api.getAllAppointments()
       ]);
       setStats(sData);
-      setDepartments(dData);
-      setDoctors(docData);
-      setAppointments(appData);
+      setDepartments(Array.isArray(dData) ? dData : []);
+      setDoctors(Array.isArray(docData) ? docData : []);
+      setAppointments(Array.isArray(appData) ? appData : []);
     } catch (err) {
-      console.error(err);
+      console.error('Failed to load admin data:', err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadAdminData();
+  }, [loadAdminData]);
 
   const handleAddDepartment = async (e) => {
     e.preventDefault();

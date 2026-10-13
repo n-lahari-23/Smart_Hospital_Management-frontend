@@ -7,8 +7,12 @@ export const Home = ({ setActivePage }) => {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    api.getDepartments().then(setDepartments).catch(console.error);
-    api.getDoctors().then(setDoctors).catch(console.error);
+    api.getDepartments()
+      .then(data => setDepartments(Array.isArray(data) ? data : []))
+      .catch(err => console.error('Failed to load departments on Home:', err));
+    api.getDoctors()
+      .then(data => setDoctors(Array.isArray(data) ? data : []))
+      .catch(err => console.error('Failed to load doctors on Home:', err));
   }, []);
 
   return (

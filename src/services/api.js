@@ -1,4 +1,27 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://smart-hospital-backend-odf9.onrender.com/api';
+// Production-ready API Service with automatic URL normalization
+const normalizeBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  let url = (typeof envUrl === 'string' && envUrl.trim())
+    ? envUrl.trim()
+    : 'https://smart-hospital-backend-odf9.onrender.com/api';
+
+  // Strip trailing slashes
+  url = url.replace(/\/+$/, '');
+
+  // Upgrade http to https for remote domains to avoid mixed-content browser blocking
+  if (!url.includes('localhost') && !url.includes('127.0.0.1') && url.startsWith('http://')) {
+    url = url.replace(/^http:\/\//, 'https://');
+  }
+
+  // Ensure /api suffix is present (prevents /doctors instead of /api/doctors)
+  if (!url.endsWith('/api')) {
+    url = `${url}/api`;
+  }
+
+  return url;
+};
+
+const BASE_URL = normalizeBaseUrl();
 
 function getHeaders() {
   const token = localStorage.getItem('token');
@@ -11,8 +34,9 @@ function getHeaders() {
 
 async function handleResponse(response) {
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ message: 'Server request failed' }));
-    throw new Error(errorData.message || `HTTP Error ${response.status}`);
+    const errorData = await response.json().catch(() => ({ message: `HTTP Error ${response.status}` }));
+    const errorMessage = errorData.message || errorData.error || `HTTP Error ${response.status}`;
+    throw new Error(errorMessage);
   }
   if (response.status === 204) return null;
   return response.json();
@@ -68,8 +92,8 @@ export const api = {
 
   // Doctors
   getDoctors: async (departmentId = null) => {
-    const url = departmentId
-      ? `${BASE_URL}/doctors?departmentId=${departmentId}`
+    const url = (departmentId !== null && departmentId !== undefined && departmentId !== '')
+      ? `${BASE_URL}/doctors?departmentId=${encodeURIComponent(departmentId)}`
       : `${BASE_URL}/doctors`;
     const res = await fetch(url);
     return handleResponse(res);
@@ -81,8 +105,8 @@ export const api = {
   },
 
   getDoctorAppointments: async (date = null) => {
-    const url = date
-      ? `${BASE_URL}/doctors/my-appointments?date=${date}`
+    const url = (date !== null && date !== undefined && date !== '')
+      ? `${BASE_URL}/doctors/my-appointments?date=${encodeURIComponent(date)}`
       : `${BASE_URL}/doctors/my-appointments`;
     const res = await fetch(url, { headers: getHeaders() });
     return handleResponse(res);

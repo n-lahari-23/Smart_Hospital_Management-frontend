@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { User, Save, Shield } from 'lucide-react';
+import { User, Save } from 'lucide-react';
 
 export const PatientProfile = () => {
   const [profile, setProfile] = useState({ name: '', phone: '', age: '', gender: 'Male', bloodGroup: 'O+', address: '', emergencyContact: '' });
