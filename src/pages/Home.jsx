@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { Calendar, Users, Activity, Award, ArrowRight, Clock, ShieldCheck, FileCheck } from 'lucide-react';
+import { Users, Activity, Award, ArrowRight, Clock, ShieldCheck } from 'lucide-react';
 
 export const Home = ({ setActivePage }) => {
   const [departments, setDepartments] = useState([]);

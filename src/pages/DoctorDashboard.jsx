@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { api } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
-import { Users, Ticket, CheckCircle, Clock, FilePlus, Calendar, Phone } from 'lucide-react';
+import { Users, CheckCircle, Clock, FilePlus, Phone } from 'lucide-react';
 import { ConsultationModal } from './ConsultationModal';
 
 export const DoctorDashboard = () => {

@@ -77,22 +77,22 @@ export const Register = ({ setActivePage }) => {
           <div className="grid grid-2">
             <div className="form-group">
               <label>Full Name *</label>
-              <input type="text" name="name" className="form-control" required value={formData.name} onChange={handleChange} placeholder="John Doe" />
+              <input type="text" name="name" className="form-control" required value={formData.name} onChange={handleChange} placeholder="e.g. Aarav Sharma" />
             </div>
             <div className="form-group">
               <label>Email Address *</label>
-              <input type="email" name="email" className="form-control" required value={formData.email} onChange={handleChange} placeholder="john@example.com" />
+              <input type="email" name="email" className="form-control" required value={formData.email} onChange={handleChange} placeholder="aarav@example.com" />
             </div>
           </div>
 
           <div className="grid grid-2">
             <div className="form-group">
               <label>Password *</label>
-              <input type="password" name="password" className="form-control" required value={formData.password} onChange={handleChange} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
+              <input type="password" name="password" className="form-control" required value={formData.password} onChange={handleChange} placeholder="••••••••" />
             </div>
             <div className="form-group">
               <label>Phone Number *</label>
-              <input type="text" name="phone" className="form-control" required value={formData.phone} onChange={handleChange} placeholder="9876543210" />
+              <input type="text" name="phone" className="form-control" required value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" />
             </div>
           </div>
 
@@ -122,12 +122,12 @@ export const Register = ({ setActivePage }) => {
                 </div>
               </div>
               <div className="form-group">
-                <label>Address</label>
-                <input type="text" name="address" className="form-control" value={formData.address} onChange={handleChange} placeholder="City, State" />
+                <label>Address (City, State, PIN)</label>
+                <input type="text" name="address" className="form-control" value={formData.address} onChange={handleChange} placeholder="e.g. Plot 42, Jubilee Hills, Hyderabad, Telangana 500033" />
               </div>
               <div className="form-group">
                 <label>Emergency Contact</label>
-                <input type="text" name="emergencyContact" className="form-control" value={formData.emergencyContact} onChange={handleChange} placeholder="Emergency phone" />
+                <input type="text" name="emergencyContact" className="form-control" value={formData.emergencyContact} onChange={handleChange} placeholder="e.g. +91 98765 43211" />
               </div>
             </>
           ) : (
@@ -148,7 +148,7 @@ export const Register = ({ setActivePage }) => {
               <div className="grid grid-3">
                 <div className="form-group">
                   <label>Qualification</label>
-                  <input type="text" name="qualification" className="form-control" value={formData.qualification} onChange={handleChange} placeholder="MD, MBBS" />
+                  <input type="text" name="qualification" className="form-control" value={formData.qualification} onChange={handleChange} placeholder="MD, MBBS, AIIMS" />
                 </div>
                 <div className="form-group">
                   <label>Experience (Years)</label>
@@ -156,7 +156,7 @@ export const Register = ({ setActivePage }) => {
                 </div>
                 <div className="form-group">
                   <label>Consultation Fee (₹ / INR)</label>
-                  <input type="number" name="consultationFee" className="form-control" value={formData.consultationFee} onChange={handleChange} placeholder="500" />
+                  <input type="number" name="consultationFee" className="form-control" value={formData.consultationFee} onChange={handleChange} placeholder="800" />
                 </div>
               </div>
             </>

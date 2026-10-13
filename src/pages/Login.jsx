@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { LogIn, Key, Mail, UserCheck } from 'lucide-react';
+import { LogIn, UserCheck } from 'lucide-react';
 
 export const Login = ({ setActivePage }) => {
   const { login } = useContext(AuthContext);

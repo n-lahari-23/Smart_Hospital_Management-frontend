@@ -2,7 +2,7 @@ import { formatCurrency } from '../utils/currency';
 import React, { useState, useEffect, useContext } from 'react';
 import { api } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
-import { Search, Calendar, Award, Clock, DollarSign, Stethoscope, CheckCircle2 } from 'lucide-react';
+import { Search, Calendar, Stethoscope } from 'lucide-react';
 
 export const DoctorSearch = ({ setActivePage, onSelectDoctor }) => {
   const { user } = useContext(AuthContext);

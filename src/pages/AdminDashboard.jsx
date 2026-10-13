@@ -1,7 +1,7 @@
 import { formatCurrency } from '../utils/currency';
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { Shield, Users, Stethoscope, Calendar, Plus, Trash2, Building } from 'lucide-react';
+import { Users, Stethoscope, Calendar, Plus, Trash2, Building } from 'lucide-react';
 
 export const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -205,6 +205,7 @@ export const AdminDashboard = () => {
                   <th>Patient</th>
                   <th>Doctor</th>
                   <th>Date & Time</th>
+                  <th>Fee (INR)</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -215,6 +216,7 @@ export const AdminDashboard = () => {
                     <td>{app.patientName}</td>
                     <td>{app.doctorName}</td>
                     <td>{app.appointmentDate} at {app.appointmentTime}</td>
+                    <td>{formatCurrency(app.consultationFee)}</td>
                     <td><span className={`status-badge status-${app.status}`}>{app.status}</span></td>
                   </tr>
                 ))}

@@ -25,13 +25,13 @@ export const Footer = () => {
         <div>
           <h4 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: '#f8fafc' }}>Contact Support</h4>
           <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#94a3b8', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-            <Phone size={16} /> +1 (800) 555-HEALTH
+            <Phone size={16} /> +91 40 2345 6789 / +91 98765 43210
           </p>
           <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#94a3b8', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-            <Mail size={16} /> support@medicarehospital.com
+            <Mail size={16} /> support@smarthospital.in
           </p>
           <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>
-            <MapPin size={16} /> 100 Health Sciences Blvd, NY
+            <MapPin size={16} /> Road No. 2, Banjara Hills, Hyderabad, Telangana 500034, India
           </p>
         </div>
       </div>

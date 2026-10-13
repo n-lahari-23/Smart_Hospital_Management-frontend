@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { formatCurrency } from '../utils/currency';
 import { Calendar, Ticket, FileText, Clock, User, AlertCircle } from 'lucide-react';
 
 export const PatientAppointments = () => {
@@ -63,6 +64,9 @@ export const PatientAppointments = () => {
               <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '0.35rem', marginBottom: '1rem' }}>
                 <div><strong>Date:</strong> {app.appointmentDate}</div>
                 <div><strong>Time:</strong> {app.appointmentTime}</div>
+                {app.consultationFee !== undefined && app.consultationFee !== null && (
+                  <div><strong>Consultation Fee:</strong> {formatCurrency(app.consultationFee)}</div>
+                )}
                 {app.symptoms && <div><strong>Symptoms:</strong> {app.symptoms}</div>}
               </div>
 

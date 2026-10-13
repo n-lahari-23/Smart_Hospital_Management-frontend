@@ -83,13 +83,13 @@ export const PatientProfile = () => {
             </div>
 
             <div className="form-group">
-              <label>Home Address</label>
-              <input type="text" className="form-control" value={profile.address} onChange={e => setProfile({...profile, address: e.target.value})} />
+              <label>Home Address (City, State, PIN)</label>
+              <input type="text" className="form-control" value={profile.address} onChange={e => setProfile({...profile, address: e.target.value})} placeholder="e.g. Plot 42, Jubilee Hills, Hyderabad, Telangana 500033" />
             </div>
 
             <div className="form-group">
               <label>Emergency Contact</label>
-              <input type="text" className="form-control" value={profile.emergencyContact} onChange={e => setProfile({...profile, emergencyContact: e.target.value})} />
+              <input type="text" className="form-control" value={profile.emergencyContact} onChange={e => setProfile({...profile, emergencyContact: e.target.value})} placeholder="e.g. +91 98765 43210" />
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={saving}>

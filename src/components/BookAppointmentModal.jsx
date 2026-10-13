@@ -68,6 +68,7 @@ export const BookAppointmentModal = ({ doctor, onClose, onSuccess }) => {
               <div><strong>Doctor:</strong> {bookedDetails.doctorName}</div>
               <div><strong>Date:</strong> {bookedDetails.appointmentDate}</div>
               <div><strong>Time:</strong> {bookedDetails.appointmentTime}</div>
+              <div><strong>Consultation Fee:</strong> {formatCurrency(bookedDetails.consultationFee || doctor.consultationFee)}</div>
               <div><strong>Status:</strong> <span className={`status-badge status-${bookedDetails.status}`}>{bookedDetails.status}</span></div>
             </div>
 
