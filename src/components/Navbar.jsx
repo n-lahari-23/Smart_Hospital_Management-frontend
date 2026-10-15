@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Activity, User, LogOut, Calendar, Stethoscope, Shield, Home, Search, FileText } from 'lucide-react';
+import { NotificationBell } from './NotificationBell';
 
 export const Navbar = ({ activePage, setActivePage }) => {
   const { user, logout } = useContext(AuthContext);
@@ -64,6 +65,7 @@ export const Navbar = ({ activePage, setActivePage }) => {
 
         {user ? (
           <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: '1rem' }}>
+            <NotificationBell />
             <span className="user-badge">
               <User size={14} /> {user.name} ({user.role})
             </span>

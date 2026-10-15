@@ -112,6 +112,42 @@ export const api = {
     return handleResponse(res);
   },
 
+  getMySchedule: async () => {
+    const res = await fetch(`${BASE_URL}/doctors/my-schedule`, { headers: getHeaders() });
+    return handleResponse(res);
+  },
+
+  updateMySchedule: async (data) => {
+    const res = await fetch(`${BASE_URL}/doctors/my-schedule`, {
+      method: 'PUT',
+      headers: getHeaders(),
+      body: JSON.stringify(data)
+    });
+    return handleResponse(res);
+  },
+
+  getMyUnavailability: async () => {
+    const res = await fetch(`${BASE_URL}/doctors/unavailability`, { headers: getHeaders() });
+    return handleResponse(res);
+  },
+
+  addUnavailability: async (data) => {
+    const res = await fetch(`${BASE_URL}/doctors/unavailability`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(data)
+    });
+    return handleResponse(res);
+  },
+
+  deleteUnavailability: async (id) => {
+    const res = await fetch(`${BASE_URL}/doctors/unavailability/${id}`, {
+      method: 'DELETE',
+      headers: getHeaders()
+    });
+    return handleResponse(res);
+  },
+
   // Patients
   getPatientProfile: async () => {
     const res = await fetch(`${BASE_URL}/patients/profile`, { headers: getHeaders() });
@@ -137,12 +173,34 @@ export const api = {
     return handleResponse(res);
   },
 
-  // Appointments
+  // Appointments & Scheduling
+  getAvailableSlots: async (doctorId, date) => {
+    const res = await fetch(`${BASE_URL}/appointments/available-slots?doctorId=${encodeURIComponent(doctorId)}&date=${encodeURIComponent(date)}`);
+    return handleResponse(res);
+  },
+
   bookAppointment: async (data) => {
     const res = await fetch(`${BASE_URL}/appointments/book`, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify(data)
+    });
+    return handleResponse(res);
+  },
+
+  cancelAppointment: async (id) => {
+    const res = await fetch(`${BASE_URL}/appointments/${id}/cancel`, {
+      method: 'PUT',
+      headers: getHeaders()
+    });
+    return handleResponse(res);
+  },
+
+  rescheduleAppointment: async (id, newDate, newTime, reason = '') => {
+    const res = await fetch(`${BASE_URL}/appointments/${id}/reschedule`, {
+      method: 'PUT',
+      headers: getHeaders(),
+      body: JSON.stringify({ newDate, newTime, reason })
     });
     return handleResponse(res);
   },
@@ -178,14 +236,67 @@ export const api = {
     return handleResponse(res);
   },
 
-  // Admin
+  // Admin Analytics & Reports
   getAdminStats: async () => {
     const res = await fetch(`${BASE_URL}/admin/stats`, { headers: getHeaders() });
     return handleResponse(res);
   },
 
+  getAdminAnalytics: async (days = 14) => {
+    const res = await fetch(`${BASE_URL}/admin/analytics?days=${encodeURIComponent(days)}`, { headers: getHeaders() });
+    return handleResponse(res);
+  },
+
+  downloadAppointmentsCsv: async () => {
+    const token = localStorage.getItem('token');
+    const headers = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const res = await fetch(`${BASE_URL}/admin/appointments/export-csv`, { headers });
+    if (!res.ok) {
+      throw new Error(`CSV export failed with status ${res.status}`);
+    }
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `hospital_appointments_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    return true;
+  },
+
   getAllPatients: async () => {
     const res = await fetch(`${BASE_URL}/admin/patients`, { headers: getHeaders() });
+    return handleResponse(res);
+  },
+
+  // In-App Notifications
+  getMyNotifications: async () => {
+    const res = await fetch(`${BASE_URL}/notifications`, { headers: getHeaders() });
+    return handleResponse(res);
+  },
+
+  getUnreadNotificationCount: async () => {
+    const res = await fetch(`${BASE_URL}/notifications/unread-count`, { headers: getHeaders() });
+    return handleResponse(res);
+  },
+
+  markNotificationRead: async (id) => {
+    const res = await fetch(`${BASE_URL}/notifications/${id}/read`, {
+      method: 'PUT',
+      headers: getHeaders()
+    });
+    return handleResponse(res);
+  },
+
+  markAllNotificationsRead: async () => {
+    const res = await fetch(`${BASE_URL}/notifications/read-all`, {
+      method: 'PUT',
+      headers: getHeaders()
+    });
     return handleResponse(res);
   }
 };
